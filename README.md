@@ -10,11 +10,9 @@
 
 ![](https://img.shields.io/badge/Minecraft-26.x_%7C_1.21.x-62B47A?style=flat-square) ![](https://img.shields.io/badge/Side-Single_Player_%26_Server-8E44AD?style=flat-square) ![](https://img.shields.io/badge/Fabric_API-required_on_Fabric-4A90D9?style=flat-square) ![](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 
-<sub><b>English</b> · <a href="#chinese">简体中文</a></sub>
+<sub><b>English</b> · <a href="#-exprepair-1">简体中文</a></sub>
 
 </div>
-
-<a id="english"></a>
 
 ---
 
@@ -195,15 +193,13 @@ Released under the **MIT License**.
 
 ---
 
-<a id="chinese"></a>
-
 <div align="center">
 
 # 🔧 expRepair
 
 ### 用经验值修理物品 —— 自动或手动皆可。
 
-<sub><a href="#english">English</a> · <b>简体中文</b></sub>
+<sub><a href="#-exprepair">English</a> · <b>简体中文</b></sub>
 
 </div>
 
