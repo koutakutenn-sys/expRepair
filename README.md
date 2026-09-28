@@ -10,7 +10,11 @@
 
 ![](https://img.shields.io/badge/Minecraft-26.x_%7C_1.21.x-62B47A?style=flat-square) ![](https://img.shields.io/badge/Side-Single_Player_%26_Server-8E44AD?style=flat-square) ![](https://img.shields.io/badge/Fabric_API-required_on_Fabric-4A90D9?style=flat-square) ![](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 
+<sub><b>English</b> · <a href="#chinese">简体中文</a></sub>
+
 </div>
+
+<a id="english"></a>
 
 ---
 
@@ -24,8 +28,9 @@
 > **This fork** carries one compatibility change on top of upstream: an elytra worn in
 > **Elytra Slot!** (3.0.0+) is now repaired by the existing repair logic. That mod keeps a worn elytra in
 > the vanilla `BODY` equipment slot, which the scan previously skipped; it is now included. No dependency
-> is added, and nothing changes when Elytra Slot! is not installed. Code lives on the
-> [`elytra-slot-body-compat`](https://github.com/koutakutenn-sys/expRepair/tree/elytra-slot-body-compat) branch.
+> is added, and nothing changes when Elytra Slot! is not installed. The change is `EquipmentSlot.BODY`
+> added to the scanned slot list on the
+> [`multi_26.1-3`](https://github.com/koutakutenn-sys/expRepair/tree/multi_26.1-3) branch.
 
 ## ✨ Features
 
@@ -187,3 +192,185 @@ The `-multi` jar lands in `build/libs/` — drop it into your `mods/` folder on 
 Released under the **MIT License**.
 
 <div align="center"><sub>⛏️ Part of <a href="https://github.com/LunixiaLIVE/Lunixia-Minecraft-QOL-Mods">Lunixia's Minecraft QOL Mods</a>.</sub></div>
+
+---
+
+<a id="chinese"></a>
+
+<div align="center">
+
+# 🔧 expRepair
+
+### 用经验值修理物品 —— 自动或手动皆可。
+
+<sub><a href="#english">English</a> · <b>简体中文</b></sub>
+
+</div>
+
+---
+
+> [!NOTE]
+> expRepair 把经验值变成耐久度。给装备附上**经验修补**，它就会在你游玩时自动补满 —— 或者用「潜行 +
+> 右键」按需修复手中的工具。不用去追经验球，不用铁砧，不用砂轮。各版本的代码与更新日志在
+> `multi_*` 分支上。
+
+> [!IMPORTANT]
+> **本 fork** 在上游基础上带了一处兼容性改动：穿在 **Elytra Slot!**（3.0.0+）鞘翅槽里的鞘翅，现在也会
+> 被现有的修理逻辑修复。该模组把穿戴中的鞘翅存放在原版 `BODY` 装备槽里，而原来的扫描跳过了它；现在
+> 已包含。本改动不引入任何依赖，未安装 Elytra Slot! 时行为完全不变。改动内容就是把
+> `EquipmentSlot.BODY` 加入扫描槽位表，位于
+> [`multi_26.1-3`](https://github.com/koutakutenn-sys/expRepair/tree/multi_26.1-3) 分支。
+
+## ✨ 功能
+
+原版经验修补只修复你手里的物品，而且必须刚好有经验球落到身上 —— 于是你在战斗中盔甲一点点损坏，副手的
+盾牌永远等不到修复。expRepair 的做法是：装备一需要，就花掉你**已存**的经验值。
+
+- **两种修理模式，二选一。** 每位玩家选择**被动**（放手不管、常开）或**手动**（自己掌控、按需触发）。
+  开启其中一个会自动关掉另一个，所以经验值花在哪儿永远清清楚楚。
+- **被动修理 —— 整套装备。** 每秒一次，把你身上所有带**经验修补**且已损坏的装备 —— 主手、副手和四个
+  盔甲槽 —— 从经验池补满，上限可配置。你挖矿、战斗、飞行时，整套装备都在后台保持健康。
+- **手动修理 —— 只管手里的那一件。** 手持带经验修补的损坏物品，在空中「潜行 + 右键」，它当场被修复，
+  花费与单次相同的经验预算。平时不会有任何被动消耗，什么时候花经验完全由你决定。
+- **经验保护线。** 设定一个**阈值**，被动修理就不会花掉会让你掉到该等级以下的经验 —— 既攒得下下一次
+  附魔的本钱，溢出的部分又继续养着装备。
+- **经验修补是唯一门槛。** 只有附有**经验修补**的物品会被修复 —— 本模组沿用原版附魔作为开关，绝不碰
+  你不想自动修理的装备。
+- **仅生存模式，且仅在活着时。** 创造与旁观模式玩家会被跳过，死亡界面也不会消耗经验 —— 只有你真正在
+  游玩时，等级才会被转换成耐久。
+- **可点击的登录摘要。** 进入服务器时会收到一条紧凑的状态行 —— 被动/手动状态、你的经验阈值，以及
+  可直接点击的内联按钮，每位玩家都能用一条命令关掉它。
+- **完整的管理员控制。** 管理员可设置全服默认值、为任意玩家强制开关某个模式，也能**完全禁用**任一
+  模式，让所有人都开不了。配置支持**热重载**，无需重启。
+- **与 PvP 模组友好共存。** expRepair 暴露了一个抑制钩子，配套模组（例如 pvpOption）可以用它在战斗中
+  暂停修理，让战斗模组能阻止决斗期间触发经验修理。
+- **服务端运行。** 一切都在服务端进行 —— **原版客户端**即可连接使用，在单人游戏里表现完全一致。
+
+## 🔧 工作原理
+
+经验值以固定且透明的比例转换成耐久：**1 点经验恢复 2 点耐久**。每次修理最多花费 `maxXpPerRepair`
+点经验（默认 **8**，即最多 **16 点耐久**），从你的**总**经验里扣除 —— 包括等级*和*进度条，而不只是
+散落的经验球。
+
+- **被动**每秒触发一次。`maxXpPerRepair` 是**每 tick 的总预算**，按槽位顺序（主手、副手、头盔、胸甲、
+  护腿、靴子）在所有已装备的经验修补物品之间共享，直到预算用尽或损坏修完。花费前会先扣掉你的**阈值**
+  底线：如果经验处于或低于该等级，被动修理就等你赚到更多经验再动手。
+- **手动**把完整的 `maxXpPerRepair` 预算用在手里的**单件**经验修补物品上，每次「潜行 + 右键」触发一次。
+  它忽略阈值 —— 既然你主动要求，它就会尽量花。
+- 部分损坏的物品只会被部分修复；动作栏提示会告诉你物品是**完全修好**还是修了多少耐久，手动修理在经验
+  不足时也会给出提示。
+
+每位玩家的选择（模式、阈值、登录消息开关）保存在 `config/exprepair/playerdata.json`，服务器设置保存在
+`config/exprepair.json`。
+
+## ⌨️ 命令
+
+基础命令是 **`/exprepair`**，快捷别名 **`/er`**。不带参数运行会打开一个可点击的帮助界面。
+
+### 👤 玩家
+
+| 命令 | 作用 |
+|---|---|
+| `/exprepair` | 可点击帮助 —— 每条命令都带内联按钮。 |
+| `/exprepair passive` | 开关**被动**修理（同时关闭手动）。 |
+| `/exprepair manual` | 开关**手动**修理（同时关闭被动）。 |
+| `/exprepair threshold` | 显示你当前的经验底线。 |
+| `/exprepair threshold <levels>` | 设置被动修理不会花到该等级以下（`0` 表示清除）。 |
+| `/exprepair status` | 显示你的被动、手动与阈值设置。 |
+| `/exprepair serverdefaults` | 查看服务器对新玩家的默认设置。 |
+| `/exprepair loginmessage` | 为你自己开关登录时的状态提示。 |
+| `/exprepair version` | 显示已安装的模组版本。 |
+
+### 🛡️ 管理员
+
+所有管理员命令都需要**游戏管理员权限**（op 等级 2 及以上）。
+
+| 命令 | 作用 |
+|---|---|
+| `/exprepair admin` | 查看全服默认值与允许开关。 |
+| `/exprepair admin <player>` | 查看该玩家当前的实时设置。 |
+| `/exprepair admin <player> reset` | 把某位玩家重置为当前服务器默认值。 |
+| `/exprepair admin <player> passive on\|off` | 为某位玩家强制开启/关闭被动。 |
+| `/exprepair admin <player> manual on\|off` | 为某位玩家强制开启/关闭手动。 |
+| `/exprepair admin <player> threshold <levels>` | 设置某位玩家的经验底线。 |
+| `/exprepair admin passive on\|off` | 设置新玩家的**默认**被动状态。 |
+| `/exprepair admin passive allow on\|off [silent]` | 全服允许或**禁止**被动修理。 |
+| `/exprepair admin manual on\|off` | 设置新玩家的**默认**手动状态。 |
+| `/exprepair admin manual allow on\|off [silent]` | 全服允许或**禁止**手动修理。 |
+| `/exprepair admin threshold <levels>` | 设置新玩家的默认经验底线。 |
+| `/exprepair admin maxXpPerRepair <xp>` | 设置每次修理最多花费的经验（最小 `1`）。 |
+| `/exprepair admin reload [silent]` | 从磁盘重新读取 `exprepair.json` —— 无需重启。 |
+
+> [!TIP]
+> 在 `allow`、`reload` 之类的命令后加上 `silent`，可以**不**向全服在线玩家广播就应用改动 —— 适合会话
+> 中途悄悄调整。
+
+## 💡 使用场景
+
+- **一劳永逸的生存玩家。** 给盔甲和工具附上经验修补，执行 `/exprepair passive`，整套装备就会在你游玩时
+  靠周遭的经验自我维持 —— 再也不会在洞穴深处装备突然报废。
+- **缺经验的附魔师。** 你正在为一次大附魔攒等级。执行 `/exprepair threshold 30`，被动修理就只会花掉
+  **高于** 30 级的经验 —— 装备照样在修，附魔本钱却被保住。
+- **讲究掌控的硬核玩家。** 你想按自己的节奏修理。切到 `/exprepair manual`，在你决定的那一刻用「潜行 +
+  右键」把手中工具补满 —— 除此之外，经验条一滴不流。
+- **以 PvP 为主的服务器。** 管理员执行 `/exprepair admin passive allow off`，把被动自动修理挡在竞技场
+  之外，或者借助 PvP 抑制钩子让战斗模组在战斗期间暂停修理 —— 同时在别处仍允许玩家自由修理。
+
+## ⚙️ 配置
+
+服务器设置保存在 **`config/exprepair.json`**，首次启动时生成，可在游戏内用 `/exprepair admin …` 编辑。
+通过命令做的修改会立即保存；直接改文件的内容则执行 `/exprepair admin reload` 后生效 —— 无需重启。
+
+| 键 | 默认值 | 含义 |
+|---|:---:|---|
+| `maxXpPerRepair` | `8` | 每次修理最多花费的经验 —— 被动为每 tick，手动为每次点击。1 经验 = 2 耐久，所以 `8` = 最多 16 耐久。最小 `1`。 |
+| `defaultPassive` | `false` | 新玩家是否默认开启被动修理。 |
+| `defaultManual` | `false` | 新玩家是否默认开启手动修理。 |
+| `defaultThreshold` | `0` | 新玩家的默认经验等级底线（`0` = 不设底线）。 |
+| `allowPassive` | `true` | 总开关 —— 若为 `false`，**任何**玩家都不能使用被动修理。 |
+| `allowManual` | `true` | 总开关 —— 若为 `false`，**任何**玩家都不能使用手动修理。 |
+
+> [!NOTE]
+> `defaultPassive` 与 `defaultManual` 不能同时为开 —— 两种模式互斥，如果都设为 `true`，则手动优先、
+> 被动被强制关闭。每位玩家的状态（所选模式、阈值、登录消息开关）单独保存在
+> `config/exprepair/playerdata.json`。
+
+## 📦 版本与下载
+
+> [!NOTE]
+> 本仓库采用**每个版本一个分支**的结构。这个 `main` 分支**只有文档** —— 每个 Minecraft 版本的代码都在
+> 各自的分支上，各自拥有独立的历史与 `CHANGELOG.md`。
+
+| 分支 | Minecraft | 加载器 | 依赖 | 日志 |
+|:------:|:---------:|:-------:|:------------:|:---:|
+| [`multi_26.1-3`](https://github.com/LunixiaLIVE/expRepair/tree/multi_26.1-3) | 26.1 – 26.3 *（一个 jar 通吃）* | Fabric · NeoForge | Fabric API *（仅 Fabric）* | [📄](https://github.com/LunixiaLIVE/expRepair/blob/multi_26.1-3/CHANGELOG.md) |
+| [`multi_1.21.11`](https://github.com/LunixiaLIVE/expRepair/tree/multi_1.21.11) | 1.21.11 | Fabric · NeoForge | Fabric API *（仅 Fabric）* | [📄](https://github.com/LunixiaLIVE/expRepair/blob/multi_1.21.11/CHANGELOG.md) |
+| [`multi_1.21.5`](https://github.com/LunixiaLIVE/expRepair/tree/multi_1.21.5) | 1.21.5–1.21.10 | Fabric · NeoForge | Fabric API *（仅 Fabric）* | [📄](https://github.com/LunixiaLIVE/expRepair/blob/multi_1.21.5/CHANGELOG.md) |
+| [`multi_26.2`](https://github.com/LunixiaLIVE/expRepair/tree/multi_26.2) | 26.2.x *（已归档）* | Fabric · NeoForge | Fabric API *（仅 Fabric）* | [📄](https://github.com/LunixiaLIVE/expRepair/blob/multi_26.2/CHANGELOG.md) |
+| [`multi_26.1`](https://github.com/LunixiaLIVE/expRepair/tree/multi_26.1) | 26.1, 26.1.1, 26.1.2 *（已归档）* | Fabric · NeoForge | Fabric API *（仅 Fabric）* | [📄](https://github.com/LunixiaLIVE/expRepair/blob/multi_26.1/CHANGELOG.md) |
+
+> [!TIP]
+> 每个 `multi_*` 分支都会构建出**一个 `-multi.jar`，同时支持 Fabric 与 NeoForge**。在 26.x 上它是单个
+> 合并 jar（那里的 Minecraft 没有混淆）；在 1.21.x 上则是 jar-in-jar 打包，把 Fabric 与 NeoForge 构建
+> 嵌在里面，由各自的加载器取用。也会产出各加载器单独的 `-fabric` / `-neoforge` jar（在
+> `build/staging/`）。完全自包含 —— **无需额外安装任何前置库模组**。
+
+<details>
+<summary>🛠️ <b>从源码构建</b></summary>
+
+每个代码分支都是一个自包含的 Gradle 项目。检出与你 Minecraft 版本对应的分支：
+
+```bash
+git clone -b multi_26.1-3 https://github.com/LunixiaLIVE/expRepair.git
+cd expRepair
+./gradlew build
+```
+
+`-multi` jar 会出现在 `build/libs/` —— 把它放进任一加载器的 `mods/` 文件夹即可。
+</details>
+
+## 📄 许可
+
+以 **MIT 许可证**发布。
+
+<div align="center"><sub>⛏️ 属于 <a href="https://github.com/LunixiaLIVE/Lunixia-Minecraft-QOL-Mods">Lunixia's Minecraft QOL Mods</a> 的一部分。</sub></div>
