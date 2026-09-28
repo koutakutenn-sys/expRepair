@@ -20,6 +20,13 @@
 > XP orbs to chase, no anvils, no grindstones. Per-version code and changelog live on the
 > [`multi_*`](#-versions--downloads) branches.
 
+> [!IMPORTANT]
+> **This fork** carries one compatibility change on top of upstream: an elytra worn in
+> **Elytra Slot!** (3.0.0+) is now repaired by the existing repair logic. That mod keeps a worn elytra in
+> the vanilla `BODY` equipment slot, which the scan previously skipped; it is now included. No dependency
+> is added, and nothing changes when Elytra Slot! is not installed. Code lives on the
+> [`elytra-slot-body-compat`](https://github.com/koutakutenn-sys/expRepair/tree/elytra-slot-body-compat) branch.
+
 ## ✨ Features
 
 Vanilla Mending only heals the item you're holding, and only when an XP orb happens to land — so your
