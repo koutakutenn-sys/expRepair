@@ -64,7 +64,10 @@ public class Exprepair {
     private static final EquipmentSlot[] SLOTS = {
         EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND,
         EquipmentSlot.HEAD, EquipmentSlot.CHEST,
-        EquipmentSlot.LEGS, EquipmentSlot.FEET
+        EquipmentSlot.LEGS, EquipmentSlot.FEET,
+        // Vanilla BODY slot. Elytra Slot! (3.0.0+) stores a worn elytra here for players,
+        // so this lets the existing repair logic reach it. Empty without that mod.
+        EquipmentSlot.BODY
     };
 
     // =========================================================================
